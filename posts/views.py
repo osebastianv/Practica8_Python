@@ -17,8 +17,7 @@ class HomeView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'WordPlease'
-        context['claim'] = 'Una plataforma de Blogs para expresar tus ideas'
+        context['title'] = 'Listado de últimos posts'
         return context
 
         model = Post

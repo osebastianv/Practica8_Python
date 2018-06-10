@@ -3,15 +3,32 @@
 {% block title %} {{ post.title }} {% endblock %}
 
 {% block body %}
-    <h1>{{post.title}}</h1>
+    <section class="detail">
+        <section class="the-article">
+            <h1 class="header-title">{{ post.title }}</h1>
 
-    {% if post.url.url != '' %}
-        <img src="{{ post.url.url }}" alt="{{ post.title }}" title="{{ post.title }}">
-    {% else %}
-        {% load static %}
-        <img src="{% static 'img/no_image.png' %}" alt="{{ post.title }}" title="{{ post.title }}">
-    {% endif %}
+            <figure class="image-article">
+                {% if post.url.url != '' %}
+                    <img class="image-header" src="{{ post.url.url }}" alt="{{ post.title }}" title="{{ post.title }}">
+                {% else %}
+                    {% load static %}
+                    <img class="image-header" src="{% static 'img/no_image.png' %}" alt="{{ post.title }}" title="{{ post.title }}">
+                {% endif %}
 
-    <h2>{{post.intro}}</h2>
-    <p>{{ad.body}}</p>
+                <figcaption class="image-description">
+                    <cite>{{ post.title }}</cite>
+                </figcaption>
+            </figure>
+
+            <div class="author-detail">
+                <img class="place-holder" src="{% static 'img/photo.png' %}" alt="{{post.owner.username}}"
+                     title="{{ post.owner.username }}">
+                <div class="name-detail">{{post.owner.first_name}} {{post.owner.last_name}},
+                        {{post.created_on}}</div>
+            </div>
+
+            <h2>{{post.intro}}</h2>
+            <p>{{post.body}}</p>
+        </section>
+    </section>
 {% endblock %}
