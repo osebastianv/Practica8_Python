@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %} {{ post.title }} {% endblock %}
+
+{% block body %}
+    <h1>{{post.title}}</h1>
+
+    {% if post.url.url != '' %}
+        <img src="{{ post.url.url }}" alt="{{ post.title }}" title="{{ post.title }}">
+    {% else %}
+        {% load static %}
+        <img src="{% static 'img/no_image.png' %}" alt="{{ post.title }}" title="{{ post.title }}">
+    {% endif %}
+
+    <h2>{{post.intro}}</h2>
+    <p>{{ad.body}}</p>
+{% endblock %}

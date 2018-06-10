@@ -1,0 +1,16 @@
+.articles-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: var(--header-backcolor);
+    color: black;
+    padding-top: var(--header-height);
+    display: none;
+    width: auto;
+    height: auto;
+}
+
+body.show-menu {
+    display: block;
+    float: right;
+}

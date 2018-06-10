@@ -1,0 +1,12 @@
+:root {
+    --main-font-family: "Karla", sans-serif;
+    --title-font-family: "Karla", serif;
+
+    --header-backcolor: rgb(225, 225, 225);
+    --main-text-color: #594f4f;
+    --shadow-color: rgb(75, 75, 75);
+
+    --header-height: 55px;
+    --large-device-width: 750px;
+    --extra-large-device-width: 900px;
+}
