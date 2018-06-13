@@ -2,23 +2,20 @@
 
 {% block title %} {{ post.title }} {% endblock %}
 
+{% load static %}
 {% block body %}
     <section class="detail">
         <section class="the-article">
             <h1 class="header-title">{{ post.title }}</h1>
 
-            <figure class="image-article">
-                {% if post.url.url != '' %}
+            {% if post.url.url != '' %}
+                <figure class="image-article">
                     <img class="image-header" src="{{ post.url.url }}" alt="{{ post.title }}" title="{{ post.title }}">
-                {% else %}
-                    {% load static %}
-                    <img class="image-header" src="{% static 'img/no_image.png' %}" alt="{{ post.title }}" title="{{ post.title }}">
-                {% endif %}
-
-                <figcaption class="image-description">
-                    <cite>{{ post.title }}</cite>
-                </figcaption>
-            </figure>
+                    <figcaption class="image-description">
+                        <cite>{{ post.title }}</cite>
+                    </figcaption>
+                </figure>
+            {% endif %}
 
             <div class="author-detail">
                 <img class="place-holder" src="{% static 'img/photo.png' %}" alt="{{post.owner.username}}"

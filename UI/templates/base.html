@@ -16,6 +16,15 @@
         <h1 class="web-title">WordPlease</h1>
         <nav class="nav-menu">
             <a class="menu-item" href="{% url 'home' %}">Home</a>
+
+            {% if user.is_authenticated %}
+                <a class="menu-item" href="{% url 'user-post-list' user.username %}">Mis posts</a>
+                Hola {{ user.first_name }} {{ user.last_name }}
+                |
+                <a class="menu-item" href="{% url 'logout' %}">logout</a>
+            {% else %}
+                <a class="menu-item" href="{% url 'login' %}">Login</a>
+            {% endif %}
         </nav>
     </header>
     <div class="container">
