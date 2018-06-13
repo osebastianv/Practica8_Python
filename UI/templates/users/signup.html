@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} Nuevo usuario {% endblock %}
+
+{% block body %}
+
+<h1>Nuevo anuncio</h1>
+
+{% include 'includes/messages.html' %}
+
+<form method="post" novalidate>
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button>Crear usuario</button>
+
+</form>
+
+{% endblock %}

@@ -2,12 +2,13 @@ from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as django_login, logout as django_logout
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 from django.views import View
 
 from posts.models import Post
 from django.contrib.auth.models import User
-from users.forms import LoginForm
+from users.forms import LoginForm, SignupForm
 
 
 class UsersView(ListView):
@@ -91,3 +92,33 @@ class LogoutView(View):
         """
         django_logout(request)
         return redirect('login')
+
+
+class SignupView (CreateView):
+    form_class = SignupForm
+    template_name = 'users/signup.html'
+    success_message = 'New new user profile has been created'
+    #success_url = reverse_lazy('home')
+    #success_url = reverse_lazy('user-post-list', kwargs={'username': <username>})
+
+    def form_valid(self, form):
+        c = {'form': form, }
+        user = form.save(commit=False)
+        # Cleaned(normalized) data
+        password = form.cleaned_data['password']
+        repeat_password = form.cleaned_data['repeat_password']
+        if password != repeat_password:
+            messages.error(self.request, "Las contraseñas no coinciden", extra_tags='alert alert-danger')
+            return render(self.request, self.template_name, c)
+        user.set_password(password)
+        user.save()
+
+        #valid = super(SignupView, self).form_valid(form)
+        username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password')
+        new_user = authenticate(username=username, password=password)
+        django_login(self.request, new_user)
+        #return valid
+
+        url = self.request.GET.get('next', 'user-post-list')
+        return redirect(url, username=username)
+

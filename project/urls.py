@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path
 
 from posts.views import HomeView, PostDetailView
-from users.views import UsersView, UserPostView, LogoutView, LoginView
+from users.views import UsersView, UserPostView, LoginView, LogoutView, SignupView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +29,6 @@ urlpatterns = [
     path('blogs/<username>', UserPostView.as_view(), name="user-post-list"),
     path('login', LoginView.as_view(), name='login'),
     path('logout', LogoutView.as_view(), name='logout'),
+    path('signup', SignupView.as_view(), name='signup'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
