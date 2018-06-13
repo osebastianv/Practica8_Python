@@ -4,32 +4,58 @@
 {% block body %}
     <h1 class="header-title">{{ title }}</h1>
 
-    {% if object_list.len == 0 %}
+    {% if post_list %}
+
+        {% if is_paginated %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                    <span><a href="?page={{ page_obj.previous_page_number }}">Anterior</a></span>
+                {% else %}
+                    <span><a href="">Anterior</a></span>
+                {% endif %}
+
+                <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+
+                {% if page_obj.has_next %}
+                    <span><a href="?page={{ page_obj.next_page_number }}">Siguiente</a></span>
+                {% else %}
+                    <span><a href="">Siguiente</a></span>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% for post in post_list %}
+            <article class="article">
+                <div class="url">
+                    {% if post.url.url != '' %}
+                        <img src="{{ post.url.url }}" alt="{{ post.title }}" title="{{ post.title }}">
+                    {% else %}
+                        <img src="{% static 'img/no_image.png' %}" alt="{{ post.title }}" title="{{ post.title }}"
+                             width="200px">
+                    {% endif %}
+                </div>
+                <div class="info">
+                    <a href="{% url 'post-detail' post.owner.username post.pk %}">
+                        <div class="title">{{post.title}}</div>
+                    </a>
+                    <div class="intro">{{post.intro}}</div>
+
+                    <div class="author">
+                        <img src="{% static 'img/photo.png' %}" alt="{{post.owner.username}}"
+                             title="{{ post.owner.username }}">
+                        <div class="name">{{post.owner.first_name}} {{post.owner.last_name}},
+                            {{post.created_on}}</div>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+
+
+
+
+
+    {% else %}
         <div class="empty">No hay ningún artículo</div>
     {% endif %}
 
-    {% for post in object_list %}
-        <article class="article">
-            <div class="url">
-                {% if post.url.url != '' %}
-                    <img src="{{ post.url.url }}" alt="{{ post.title }}" title="{{ post.title }}">
-                {% else %}
-                    <img src="{% static 'img/no_image.png' %}" alt="{{ post.title }}" title="{{ post.title }}">
-                {% endif %}
-            </div>
-            <div class="info">
-                <a href="{% url 'post-detail' post.owner.username post.pk %}">
-                    <div class="title">{{post.title}}</div>
-                </a>
-                <div class="intro">{{post.intro}}</div>
-
-                <div class="author">
-                    <img src="{% static 'img/photo.png' %}" alt="{{post.owner.username}}"
-                         title="{{ post.owner.username }}">
-                    <div class="name">{{post.owner.first_name}} {{post.owner.last_name}},
-                        {{post.created_on}}</div>
-                </div>
-            </div>
-        </article>
-    {% endfor %}
 {% endblock %}

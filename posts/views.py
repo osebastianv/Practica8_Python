@@ -10,17 +10,17 @@ class HomeView(ListView):
 
     model = Post
     template_name = 'posts/list.html'
+    context_object_name = "post_list"
+    paginate_by = 3
 
     def get_queryset(self):
-        result = super().get_queryset().select_related().filter(published=True).order_by('-created_on')[:5]
+        result = super().get_queryset().select_related().filter(published=True).order_by('-created_on')
         return result
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Listado de últimos posts'
         return context
-
-        model = Post
 
 
 class PostDetailView(DetailView):
