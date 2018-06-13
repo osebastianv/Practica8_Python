@@ -19,10 +19,13 @@ from django.contrib import admin
 from django.urls import path
 
 from posts.views import HomeView, PostDetailView
+from users.views import UsersView, UserPostView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name="home"),
     path('blogs/<username>/<int:pk>', PostDetailView.as_view(), name="post-detail"),
+    path('blogs/', UsersView.as_view(), name="user-list"),
+    path('blogs/<username>', UserPostView.as_view(), name="user-post-list"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
