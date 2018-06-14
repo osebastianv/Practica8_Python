@@ -20,8 +20,12 @@
             <div class="author-detail">
                 <img class="place-holder" src="{% static 'img/photo.png' %}" alt="{{post.owner.username}}"
                      title="{{ post.owner.username }}">
-                <div class="name-detail">{{post.owner.first_name}} {{post.owner.last_name}},
-                        {{post.created_on}}</div>
+                <div class="name-detail">{{post.owner.first_name}} {{post.owner.last_name}}
+                    {% if post.published_on != None %}
+                        ,
+                        {{post.published_on}}
+                    {% endif %}
+                </div>
             </div>
 
             <h2>{{post.intro}}</h2>

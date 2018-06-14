@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from posts.views import HomeView, PostDetailView
+from posts.views import HomeView, PostDetailView, NewPostView
 from users.views import UsersView, UserPostView, LoginView, LogoutView, SignupView
 
 urlpatterns = [
@@ -27,6 +27,7 @@ urlpatterns = [
     path('blogs/<username>/<int:pk>', PostDetailView.as_view(), name="post-detail"),
     path('blogs/', UsersView.as_view(), name="user-list"),
     path('blogs/<username>', UserPostView.as_view(), name="user-post-list"),
+    path('new-post', NewPostView.as_view(), name='new-post'),
     path('login', LoginView.as_view(), name='login'),
     path('logout', LogoutView.as_view(), name='logout'),
     path('signup', SignupView.as_view(), name='signup'),

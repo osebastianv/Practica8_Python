@@ -28,10 +28,9 @@
             <article class="article">
                 <div class="url">
                     {% if post.url.url != '' %}
-                        <img src="{{ post.url.url }}" alt="{{ post.title }}" title="{{ post.title }}">
-                    {% else %}
-                        <img src="{% static 'img/no_image.png' %}" alt="{{ post.title }}" title="{{ post.title }}"
-                             width="200px">
+                        {% if 'image' in post.url.content_type %}
+                            <img src="{{ post.url.url }}" alt="{{ post.title }}" title="{{ post.title }}">
+                        {% endif %}
                     {% endif %}
                 </div>
                 <div class="info">
@@ -43,8 +42,12 @@
                     <div class="author">
                         <img src="{% static 'img/photo.png' %}" alt="{{post.owner.username}}"
                              title="{{ post.owner.username }}">
-                        <div class="name">{{post.owner.first_name}} {{post.owner.last_name}},
-                            {{post.created_on}}</div>
+                        <div class="name">{{post.owner.first_name}} {{post.owner.last_name}}
+                            {% if post.published_on != None %}
+                                ,
+                                {{post.published_on}}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </article>
