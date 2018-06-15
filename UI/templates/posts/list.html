@@ -5,7 +5,6 @@
     <h1 class="header-title">{{ title }}</h1>
 
     {% if post_list %}
-
         {% if is_paginated %}
             <div class="pagination">
                 <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
@@ -28,7 +27,14 @@
             <article class="article">
                 <div class="url">
                     {% if post.url.url != '' %}
-                        <img src="{{ post.url.url }}" alt="{{ post.title }}" title="{{ post.title }}">
+                        {% if 'video' in post.content_type %}
+                            <video width="200" controls>
+                              <source src="{{ post.url.url }}" type="{{post.content_type}}">
+                            </video>
+                        {% else %}
+                            <img src="{{ post.url.url }}" alt="{{ post.title }}" title="{{ post.title }}"
+                                 width="200px">
+                        {% endif %}
                     {% else %}
                         <img src="{% static 'img/no_image.png' %}" alt="{{ post.title }}" title="{{ post.title }}"
                              width="200px">
@@ -39,8 +45,10 @@
                         <div class="title">{{post.title}}</div>
                     </a>
                     <div class="intro">{{post.intro}}</div>
-
+                    <div class="intro2">{{post.content_type}}</div>
                     <div class="author">
+                        <div class="intro">{{post.intro}}</div>
+
                         <img src="{% static 'img/photo.png' %}" alt="{{post.owner.username}}"
                              title="{{ post.owner.username }}">
                         <div class="name">{{post.owner.first_name}} {{post.owner.last_name}}

@@ -10,7 +10,18 @@
 
             {% if post.url.url != '' %}
                 <figure class="image-article">
-                    <img class="image-header" src="{{ post.url.url }}" alt="{{ post.title }}" title="{{ post.title }}">
+                    {% if post.url.url != '' %}
+                        {% if 'video' in post.content_type %}
+                            <video controls>
+                              <source src="{{ post.url.url }}" type="{{post.content_type}}">
+                            </video>
+                        {% else %}
+                            <img class="image-header" src="{{ post.url.url }}" alt="{{ post.title }}"
+                                 title="{{ post.title }}">
+                        {% endif %}
+                    {% endif %}
+
+
                     <figcaption class="image-description">
                         <cite>{{ post.title }}</cite>
                     </figcaption>

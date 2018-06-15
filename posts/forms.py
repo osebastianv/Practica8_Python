@@ -18,9 +18,8 @@ class NewPostForm(ModelForm):
         if url is not None:
             content_type = url.content_type.split('/')[0]
             if content_type not in settings.CONTENT_TYPES:
-                raise ValidationError('El archivo no es válido')
+                raise ValidationError('El archivo no es válido, solo permite imágenes o videos')
             if url.size > int(settings.MAX_UPLOAD_SIZE):
-                #raise ValidationError('El archivo no es válido')
                 raise ValidationError('Por favor, conserve el tamaño del archivo por debajo %(value)s. '
                                       'Tamaño actual: %(value2)s',
                           params={'value': filesizeformat(settings.MAX_UPLOAD_SIZE),

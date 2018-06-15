@@ -22,9 +22,6 @@ class HomeView(ListView):
         result = super().get_queryset().select_related().filter(published=True)\
             .filter(owner__is_active=True).order_by('-published_on')
 
-        #result2 = super().get_queryset().prefetch_related("categories").filter(published=True)\
-        #    .filter(owner__is_active=True).order_by('-published_on')
-
         return result
 
     def get_context_data(self, **kwargs):
@@ -62,8 +59,23 @@ class NewPostView (CreateView):
         post.owner = self.request.user
         username = post.owner.username
 
-        categories = form.cleaned_data['categories']
+        """
+        Casos de uso del campo url (FileField)
+        1. Insert Empty: url = None
+        2. Insert Image: url.content_type = "image/...", "video/..."
+        """
+        url = form.cleaned_data['url']
+        if url == None:
+            # No exists image / video
+            post.url = None
+            post.content_type = None
+        else:
+            # Exists image / video
+            post.content_type = url.content_type
 
+        """
+        Si se publica se incluye la fecha de publicación
+        """
         published = form.cleaned_data['published']
         if published == True:
             post.published_on = datetime.now()
@@ -71,6 +83,10 @@ class NewPostView (CreateView):
             post.published_on = None
         post.save()
 
+        """
+        Añadimos las categorías después de crear el post y obtener su id
+        """
+        categories = form.cleaned_data['categories']
         for category in categories:
             post.categories.add(category)
 
