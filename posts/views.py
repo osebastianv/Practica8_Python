@@ -22,6 +22,9 @@ class HomeView(ListView):
         result = super().get_queryset().select_related().filter(published=True)\
             .filter(owner__is_active=True).order_by('-published_on')
 
+        #result2 = super().get_queryset().prefetch_related("categories").filter(published=True)\
+        #    .filter(owner__is_active=True).order_by('-published_on')
+
         return result
 
     def get_context_data(self, **kwargs):
@@ -40,6 +43,7 @@ class PostDetailView(DetailView):
         try:
             post = super().get_queryset().select_related().filter(id=self.kwargs.get('pk'))\
                     .filter(published=True).filter(owner__is_active=True)
+
         except post.DoesNotExist:
             raise Http404("El post solicitado no existe")
 

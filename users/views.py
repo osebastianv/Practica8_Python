@@ -37,7 +37,15 @@ class UserPostView(ListView):
 
     def get_queryset(self):
         username = self.kwargs.get("username")
-        result = super().get_queryset().select_related().filter(owner__username=username).filter(published=True).order_by('-created_on')
+
+        is_authenticated = self.request.user.is_authenticated
+
+        if is_authenticated:
+            result = super().get_queryset().select_related().filter(owner__username=username)\
+                    .order_by('-created_on')
+        else:
+            result = super().get_queryset().select_related().filter(owner__username=username)\
+                    .filter(published=True).order_by('-published_on')
         return result
 
     def get_context_data(self, **kwargs):
