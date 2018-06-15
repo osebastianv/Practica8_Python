@@ -132,7 +132,7 @@ LOGIN_URL = 'login'
 
 
 # Add to your settings file
-CONTENT_TYPES = ['image', 'video']
+CONTENT_TYPES = ['image']
 # 2.5MB - 2621440
 # 5MB - 5242880
 # 10MB - 10485760

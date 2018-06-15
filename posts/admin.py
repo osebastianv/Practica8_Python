@@ -11,11 +11,15 @@ admin.site.register(Category)
 @register(Post)
 class PostAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
-        obj.published_on = request.user
+        #obj.published_on = request.user
 
         published = form.cleaned_data['published']
+
+        url = form.cleaned_data['url']
+
         if published == True:
-            obj.published_on = datetime.now()
+            if obj.published_on == None:
+                obj.published_on = datetime.now()
         else:
             obj.published_on = None
 

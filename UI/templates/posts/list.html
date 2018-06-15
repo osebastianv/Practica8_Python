@@ -28,8 +28,11 @@
             <article class="article">
                 <div class="url">
                     {% if post.url.url != '' %}
-                        {% if 'image' in post.url.content_type %}
+                        {% if post.url.url != '' %}
                             <img src="{{ post.url.url }}" alt="{{ post.title }}" title="{{ post.title }}">
+                        {% else %}
+                            <img src="{% static 'img/no_image.png' %}" alt="{{ post.title }}" title="{{ post.title }}"
+                                 width="200px">
                         {% endif %}
                     {% endif %}
                 </div>
