@@ -6,7 +6,7 @@ from datetime import datetime
 from posts.models import Category, Post
 
 admin.site.register(Category)
-#admin.site.register(Post)
+
 
 @register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -50,10 +50,10 @@ class PostAdmin(admin.ModelAdmin):
             'fields': ['title', 'intro', 'body']
         }],
         ['Attributtes', {
-            'fields': ['url', 'content_type', 'published', 'published_on']
+            'fields': ['url', 'url_html', 'content_type', 'published']
         }],
         ['Important dates', {
-            'fields': ['created_on', 'modified_on', 'url_html']
+            'fields': ['created_on', 'modified_on', 'published_on']
         }]
     ]
 
@@ -96,3 +96,7 @@ class PostAdmin(admin.ModelAdmin):
             obj.published_on = None
 
         super(PostAdmin, self).save_model(request, obj, form, change)
+
+admin.site.site_header = 'WordPlease Admin'
+admin.site.site_title = 'WordPlease Admin'
+admin.site.index_title = 'Dashboard'
