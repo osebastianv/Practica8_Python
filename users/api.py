@@ -39,12 +39,13 @@ class UserPostViewSet(ModelViewSet):
 
 """
     def list(self, request):
-        year = 23
+        username = 23
         data = {
-            'year-summary-url': reverse('year-summary', args=[year], request=request)
+            'blogs-url': reverse('user-post-list', args=[username], request=request)
         }
         return Response(data)
-
+"""
+"""
     def get_url(self, obj, view_name, request):
         kwargs = {'username': obj.get('username')}
         return reverse(view_name, kwargs=kwargs, request=request)

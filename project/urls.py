@@ -43,5 +43,6 @@ urlpatterns = [
 
     # API URLs
     path('api/v1/', include(router.urls)),
+    #path('api/v1/blogs/', UserPostViewSet.as_view({'list'}), name='blog-list'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
