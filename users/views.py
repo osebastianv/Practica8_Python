@@ -78,19 +78,6 @@ class LoginView(View):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
 
-            #is_active = form.cleaned_data.get('is_active')
-
-            #is_active = False
-            #try:
-            #    user = super().get_queryset().select_related().filter(id=self.kwargs.get('pk')) \
-            #        .filter(published=True).filter(owner__is_active=True)
-            #except post.DoesNotExist:
-            #    is_active = False
-
-            #if is_active == False:
-            #    messages.error(request, 'Usuario no activo')
-            #else:
-
             # comprobamos si las credenciales son correctas
             # Si el usuario está inactivo tampoco pasa
             user = authenticate(username=username, password=password)
@@ -122,8 +109,6 @@ class SignupView (CreateView):
     form_class = SignupForm
     template_name = 'users/signup.html'
     success_message = 'New new user profile has been created'
-    #success_url = reverse_lazy('home')
-    #success_url = reverse_lazy('user-post-list', kwargs={'username': <username>})
 
     def form_valid(self, form):
         c = {'form': form, }
@@ -137,11 +122,9 @@ class SignupView (CreateView):
         user.set_password(password)
         user.save()
 
-        #valid = super(SignupView, self).form_valid(form)
         username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password')
         new_user = authenticate(username=username, password=password)
         django_login(self.request, new_user)
-        #return valid
 
         url = self.request.GET.get('next', 'user-post-list')
         return redirect(url, username=username)

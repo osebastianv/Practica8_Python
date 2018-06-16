@@ -52,7 +52,6 @@ class NewPostView (CreateView):
     success_message = 'New new user profile has been created'
 
     def form_valid(self, form):
-        #c = {'form': form, }
         post = form.save(commit=False)
         post.owner = self.request.user
         username = post.owner.username

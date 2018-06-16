@@ -25,7 +25,7 @@ from users.views import UsersView, UserPostView, LoginView, LogoutView, SignupVi
 from users.api import UserViewSet
 
 router = DefaultRouter()
-router.register('posts', PostViewSet)
+router.register('posts', PostViewSet, base_name='posts')
 router.register('users', UserViewSet, base_name='users')
 
 
