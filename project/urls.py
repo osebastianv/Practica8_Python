@@ -22,11 +22,12 @@ from rest_framework.routers import DefaultRouter
 from posts.api import PostViewSet
 from posts.views import HomeView, PostDetailView, NewPostView
 from users.views import UsersView, UserPostView, LoginView, LogoutView, SignupView
-from users.api import UserViewSet
+from users.api import UserViewSet, UserPostViewSet
 
 router = DefaultRouter()
 router.register('posts', PostViewSet, base_name='posts')
 router.register('users', UserViewSet, base_name='users')
+router.register('blogs', UserPostViewSet, base_name='blogs')
 
 
 urlpatterns = [

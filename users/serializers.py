@@ -1,6 +1,8 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
 
 from django.contrib.auth.models import User
+from rest_framework.reverse import reverse
+
 
 class UserListSerializer(ModelSerializer):
 
@@ -30,3 +32,19 @@ class UserDetailSerializer(ModelSerializer):
 
         model = User
         fields = ['id', 'username', 'first_name', 'last_name', 'email', 'password']
+
+
+class UserPostListSerializer(HyperlinkedModelSerializer):
+
+    class Meta:
+
+        model = User
+        fields = ['username']
+
+    #def list(self):
+
+    """
+    def get_url(self, obj, view_name, request):
+        kwargs = {'username': obj.get('username')}
+        return reverse(view_name, kwargs=kwargs, request=request)
+    """

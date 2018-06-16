@@ -144,3 +144,8 @@ CONTENT_TYPES = ['image', 'video']
 # 500MB - 429916160
 MAX_UPLOAD_SIZE = "5242880"
 
+# REST Framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5
+}
