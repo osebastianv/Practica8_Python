@@ -42,10 +42,11 @@ class UserPostView(ListView):
 
         if is_authenticated:
             result = super().get_queryset().select_related().filter(owner__username=username)\
-                    .order_by('-created_on')
+                    .order_by('-published_on')
         else:
             result = super().get_queryset().select_related().filter(owner__username=username)\
-                    .filter(published=True).order_by('-published_on')
+                    .filter(published=True).filter(owner__is_active=True)\
+                    .order_by('-published_on')
         return result
 
     def get_context_data(self, **kwargs):

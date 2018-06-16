@@ -19,11 +19,13 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
+from posts.api import PostViewSet
 from posts.views import HomeView, PostDetailView, NewPostView
 from users.views import UsersView, UserPostView, LoginView, LogoutView, SignupView
 from users.api import UserViewSet
 
 router = DefaultRouter()
+router.register('posts', PostViewSet)
 router.register('users', UserViewSet, base_name='users')
 
 

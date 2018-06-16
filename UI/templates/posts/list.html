@@ -45,16 +45,14 @@
                         <div class="title">{{post.title}}</div>
                     </a>
                     <div class="intro">{{post.intro}}</div>
-                    <div class="intro2">{{post.content_type}}</div>
                     <div class="author">
-                        <div class="intro">{{post.intro}}</div>
-
                         <img src="{% static 'img/photo.png' %}" alt="{{post.owner.username}}"
                              title="{{ post.owner.username }}">
-                        <div class="name">{{post.owner.first_name}} {{post.owner.last_name}}
+                        <div class="name">{{post.owner.first_name}} {{post.owner.last_name}},
                             {% if post.published_on != None %}
-                                ,
                                 {{post.published_on}}
+                            {% else %}
+                                no publicado
                             {% endif %}
                         </div>
                     </div>
@@ -63,7 +61,7 @@
         {% endfor %}
 
     {% else %}
-        <div class="empty">No hay ningún artículo</div>
+        <div class="empty">No hay ningún post</div>
     {% endif %}
 
 {% endblock %}

@@ -37,14 +37,15 @@
 
                     <div class="author">
                         <div class="name">{{user.first_name}} {{user.last_name}},
-                            {{user.date_joined}}</div>
+                            {{user.date_joined}}
+                        </div>
                     </div>
                 </div>
             </article>
         {% endfor %}
 
     {% else %}
-        <div class="empty">No hay ningún artículo</div>
+        <div class="empty">No hay ningún post</div>
     {% endif %}
 
 {% endblock %}
