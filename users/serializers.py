@@ -1,8 +1,6 @@
-from rest_framework.relations import HyperlinkedIdentityField
 from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
 
 from django.contrib.auth.models import User
-from rest_framework.reverse import reverse
 
 
 class UserListSerializer(ModelSerializer):
@@ -36,14 +34,6 @@ class UserDetailSerializer(ModelSerializer):
 
 
 class UserPostListSerializer(HyperlinkedModelSerializer):
-    """
-    url = HyperlinkedIdentityField(
-        view_name='user-post-list',
-        lookup_field='username',
-        many=True,
-        read_only=True
-    )
-"""
 
     class Meta:
 
@@ -52,13 +42,3 @@ class UserPostListSerializer(HyperlinkedModelSerializer):
         extra_kwargs = {
             'url': {'view_name': 'user-post-list', 'lookup_field': 'username'},
         }
-    """
-    def list(self):
-        a = 1
-
-    """
-    """
-    def get_url(self, obj, view_name, request):
-        kwargs = {'username': obj.get('username')}
-        return reverse(view_name, kwargs=kwargs, request=request)
-    """

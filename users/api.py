@@ -5,9 +5,6 @@ from django.contrib.auth.models import User
 from users.permissions import UserPermission, UserPostPermission
 from users.serializers import UserListSerializer, UserDetailSerializer, NewUserSerializer, UserPostListSerializer
 
-from rest_framework.response import Response
-#from django.urls import reverse
-from rest_framework.reverse import reverse
 
 class UserViewSet(ModelViewSet):
 
@@ -36,17 +33,3 @@ class UserPostViewSet(ModelViewSet):
 
     def get_serializer_class(self):
         return UserPostListSerializer
-
-"""
-    def list(self, request):
-        username = 23
-        data = {
-            'blogs-url': reverse('user-post-list', args=[username], request=request)
-        }
-        return Response(data)
-"""
-"""
-    def get_url(self, obj, view_name, request):
-        kwargs = {'username': obj.get('username')}
-        return reverse(view_name, kwargs=kwargs, request=request)
-"""
