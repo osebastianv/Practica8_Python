@@ -57,10 +57,3 @@ class PostDetailSerializer(ModelSerializer):
 
         model = Post
         fields = ['id', 'title', 'intro', 'body', 'url', 'published', 'published_on', 'categories']
-
-    def retrieve(self, obj):
-        f = open(obj.image_file.path, 'rb')
-        #image = File(f)
-        #data = base64.b64encode(image.read())
-        #f.close()
-        #return data

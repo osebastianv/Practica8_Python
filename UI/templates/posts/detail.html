@@ -12,7 +12,7 @@
                 <figure class="image-article">
                     {% if post.url.url != '' %}
                         {% if 'video' in post.content_type %}
-                            <video controls>
+                            <video class="image-header"  controls>
                               <source src="{{ post.url.url }}" type="{{post.content_type}}">
                             </video>
                         {% else %}

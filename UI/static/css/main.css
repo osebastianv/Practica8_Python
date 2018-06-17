@@ -4,7 +4,6 @@
 }
 
 body {
-    background-color: cyan;
     font-family: var(--main-font-family);
 }
 
@@ -64,8 +63,9 @@ object {
 
 .container {
     margin: 0 auto;
+    padding: 15px;
+    background: var(--container-backcolor);
     max-width: var(--extra-large-device-width);
-    background-color: coral;
     padding-top: var(--header-height);
 }
 
