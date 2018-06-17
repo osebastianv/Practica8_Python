@@ -36,8 +36,22 @@ class PostDetailView(DetailView):
 
     def get_queryset(self):
         try:
-            post = super().get_queryset().select_related().filter(id=self.kwargs.get('pk'))\
-                    .filter(published=True).filter(owner__is_active=True)
+            username = self.request.user.username
+            is_authenticated = self.request.user.is_authenticated
+            is_superuser = self.request.user.is_superuser
+
+            username_post = self.kwargs.get('username')
+
+            if is_authenticated:
+                if username == username_post or is_superuser:
+                    post = super().get_queryset().select_related().filter(id=self.kwargs.get('pk'))\
+                            .filter(owner__is_active=True)
+                else:
+                    post = super().get_queryset().select_related().filter(id=self.kwargs.get('pk')) \
+                        .filter(published=True).filter(owner__is_active=True)
+            else:
+                post = super().get_queryset().select_related().filter(id=self.kwargs.get('pk'))\
+                        .filter(published=True).filter(owner__is_active=True)
 
         except post.DoesNotExist:
             raise Http404("El post solicitado no existe")
