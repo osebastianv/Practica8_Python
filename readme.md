@@ -180,11 +180,13 @@ El sitio web contiene las siguientes características:
 - En la página principal, deberán aparecer los últimos posts publicados por los usuarios.
 
     http://127.0.0.1:8000/
+
     Contiene paginación de 5 páginas por vista.
 
 - En la URL /blogs/, se deberá mostrar un listado de los blogs de los usuarios que hay en la plataforma.
 
     http://127.0.0.1:8000/blogs/
+
     Contiene paginación de 5 páginas por vista.
 
 - El blog personal de cada usuario, se cargará en la URL /blogs/<nombre_de_usuario>/ donde aparecerán todos los posts del usuario ordenados de más actual a más antiguo (los últimos posts primero).
@@ -238,6 +240,7 @@ Deberá tener los siguientes endpoints:
     *Navegador:*
 
     http://127.0.0.1:8000/api/v1/users/
+
     Mostrará un listado de todos los usuarios creados. Adicionalmente, creará un formulario en la parte inferior que permitirá crear un nuevo usuario.
 
     Otra forma de crear un usuario sería mediante un cliente REST tipo *Insomnia* o *Postman*.
@@ -284,6 +287,7 @@ Deberá tener los siguientes endpoints:
     *Navegador:*
 
     http://127.0.0.1:8000/api/v1/users/2/
+
     Mostrará el detalle del usuario. Adicionalmente, creará un formulario en la parte inferior que permitirá actualizar el usuario.
 
     *Insomnia:*
@@ -328,7 +332,9 @@ Deberá tener los siguientes endpoints:
     *Navegador:*
 
     http://127.0.0.1:8000/api/v1/blogs/
+
     http://127.0.0.1:8000/api/v1/blogs/?search=admin
+
     http://127.0.0.1:8000/api/v1/blogs/?ordering=first_name
 
 ### 6.3 API de posts
@@ -424,6 +430,7 @@ Deberá tener los siguientes endpoints:
     *Navegador:*
 
     http://127.0.0.1:8000/api/v1/posts/
+
     Mostrará un listado de los artículos creados. Adicionalmente, creará un formulario en la parte inferior que permitirá crear un nuevo artículo.
 
     *Insomnia:*
@@ -452,11 +459,13 @@ Deberá tener los siguientes endpoints:
     *Navegador*
 
     http://127.0.0.1:8000/api/v1/posts/1/
+
     Mostrará el detalle del artículo. Adicionalmente, creará un formulario en la parte inferior que permitirá modificar el artículo.
 
 - Un endpoint de actualización de un post. Sólo podrá acceder al mismo el dueño del post o un administrador.
 
     http://127.0.0.1:8000/api/v1/posts/2/
+
     Mostrará el detalle del artículo. Adicionalmente, creará un formulario en la parte inferior que permitirá modificar el artículo.
 
     *Insomnia:*
